@@ -21,6 +21,32 @@
     flex-direction: column;
     border-radius: 1.5rem;
     overflow: hidden;
+    position: relative;
+}
+
+.btn-config {
+    background-color: #292d32;
+    padding: 0.5rem;
+    border-color: transparent;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0px -2px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+.btn-config svg {
+    height: 32px;
+    fill: #fefefe;
+}
+
+.btn-config:hover {
+    transition: all 0.3s;
+    background-color: #303439;
 }
 
 .display {
@@ -51,7 +77,7 @@
 }
 
 .display .brackets, 
-.display .percent{
+.display .percent {
     color: #26fed7;
 }
 
