@@ -5,8 +5,14 @@
     font-family: sans-serif;
 }
 
+body {
+    background-color: #0b0c0f;
+    position: relative;
+}
+
 .app {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -24,11 +30,11 @@
     position: relative;
 }
 
-.btn-config {
+#btn-config {
     background-color: #292d32;
     padding: 0.5rem;
     border-color: transparent;
-    border-radius: 1rem;
+    border-radius: 1rem 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,18 +45,98 @@
     transition: all 0.3s;
 }
 
-.btn-config svg {
+#btn-config svg {
     height: 32px;
     fill: #fefefe;
 }
 
-.btn-config:hover {
+#btn-config:hover {
     transition: all 0.3s;
     background-color: #303439;
 }
 
+#mask {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+#modal {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 18rem;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1.5rem;
+    padding: 1.5rem 2.5rem;
+    visibility: collapse;
+    color: white;
+    background-color: #22252d;
+    gap: 1rem;
+}
+
+#modal-close {
+    all: unset;
+    top: -10px;
+    right: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: end;
+    width: 100%;
+}
+
+#modal-switch {
+    height: 0;
+    width: 0;
+}
+
+label {
+	cursor: pointer;
+	color: transparent;
+	width: 5rem;
+	height: 2.5rem;
+    margin-bottom: 1.5rem;
+	background: grey;
+	display: block;
+	border-radius: 100px;
+	position: relative;
+}
+
+label:after {
+	content: '';
+	position: absolute;
+	top: 4px;
+	left: 5px;
+	width: 2rem;
+	height: 2rem;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+input:checked + label {
+	background: #069b80;
+}
+
+input:checked + label:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}
+
+label:active:after {
+	width: 2em;
+}
+/*FIM MODAL*/
+
 .display {
-    min-height: 200px;
+    min-height: 10rem;
     padding: 1.5rem;
     display: flex;
     justify-content: flex-end;

@@ -1,4 +1,40 @@
 // modal config - selecionar ponto ou virgula
+const openModal = document.getElementById("btn-config");
+const modal = document.getElementById("modal");
+const mask = document.getElementById("mask");
+const closeModal = document.getElementById("modal-close");
+const modalInput = document.getElementById("modal-switch");
+let defaultDecimalRule = false;
+
+console.log(modalInput.value);
+
+openModal.onclick = () => {
+    modal.style.visibility = "visible";
+    mask.style.display = "block";
+}
+
+closeModal.onclick = () => {
+    modal.style.visibility = "collapse";
+    mask.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal || event.target == mask) {
+        modal.style.visibility = "collapse";
+        mask.style.display = "none";
+    }
+}
+
+modalInput.onclick = () => {
+    console.log(modalInput.checked);
+    if(modalInput.checked == true){
+        defaultDecimalRule = true;
+    }else{
+        defaultDecimalRule = false;
+    }
+}
+
+console.log(defaultDecimalRule);
 
 const keys = document.querySelectorAll('.key');
 const displayInput = document.querySelector('.display .input');
