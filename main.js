@@ -79,7 +79,15 @@ function ProcessLogic(value){
         input = input.slice(0, -1);
         displayInput.innerHTML = RearrangeInput(input);
     } else if(value == "=" || value == "Enter"){
-        let result = eval(PrepareInput(input));
+        let result;
+        try {
+            result = eval(PrepareInput(input));
+        } catch (error) {
+            alert("Valor inválido!");
+            result = "";
+            displayInput.innerHTML = "";
+        }
+
         displayOutput.innerHTML = RearrangeOutput(result);
     } else if(value == "brackets"){
         if(
