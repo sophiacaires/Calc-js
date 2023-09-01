@@ -13,7 +13,6 @@ let auxiliarChar = commaChar;
 let modalText = document.getElementById("modal-text");
 
 const theme = window.localStorage.getItem("theme");
-console.log(theme);
 
 if (theme === "maurelio"){
     document.body.classList.add("maurelio");
@@ -28,7 +27,6 @@ modalInput.addEventListener('click', () => {
         window.localStorage.setItem("theme", "maurelio");
     }
 })
-console.log(theme);
 
 openModal.onclick = () => {
     modal.style.visibility = "visible";
@@ -59,7 +57,6 @@ let validInput = ["1","2","3","4","5","6","7","8","9","0","/","*","-","+","Enter
 let value;
 
 function logKey(keyboardKey) {
-    console.log(keyboardKey.code);
     if(validInput.includes(keyboardKey.key)){
         ProcessLogic(keyboardKey.key);
     }else{
@@ -83,7 +80,6 @@ function ProcessLogic(value){
         displayInput.innerHTML = RearrangeInput(input);
     } else if(value == "=" || value == "Enter"){
         let result = eval(PrepareInput(input));
-        console.log(result);
         displayOutput.innerHTML = RearrangeOutput(result);
     } else if(value == "brackets"){
         if(
