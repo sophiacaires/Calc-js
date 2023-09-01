@@ -10,9 +10,23 @@ let decimalChar = dotChar;
 let auxiliarChar = commaChar;
 let modalText = document.getElementById("modal-text");
 
+const theme = window.localStorage.getItem("theme");
+console.log(theme);
+
+if (theme === "barbie"){
+    document.body.classList.add("barbie");
+    modalInput.checked = true;
+}
+
 modalInput.addEventListener('click', () => {
-    
+    document.body.classList.toggle("barbie");
+    if (theme === "barbie") {
+        window.localStorage.setItem("theme", null);
+    } else{
+        window.localStorage.setItem("theme", "barbie");
+    }
 })
+console.log(theme);
 
 openModal.onclick = () => {
     modal.style.visibility = "visible";

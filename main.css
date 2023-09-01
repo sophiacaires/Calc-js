@@ -1,3 +1,27 @@
+:root {
+    --bg-body: #0b0c0f;
+    --bg-calc: #22252d;
+    --bg-keyboard: #292d32;
+    --bg-key: #262933;
+    --text-color: #fefefe;
+    --bg-modal: #069b80;
+    --lbl-modal: 1;
+    --primary-text: #26fed7;
+    --secondary-text: #eb6666;
+}
+
+.barbie {
+    --bg-body: #0f0007;
+    --bg-calc: #2d0018;
+    --bg-keyboard: #32001c;
+    --bg-key: #33001b;
+    --text-color: #fefefe;
+    --bg-modal: #9b064c;
+    --lbl-modal: 1;
+    --primary-text: #f3c10a;
+    --secondary-text: #ff811a;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +30,7 @@
 }
 
 body {
-    background-color: #0b0c0f;
+    background-color: var(--bg-body);
     position: relative;
 }
 
@@ -19,7 +43,7 @@ body {
 }
 
 .calc {
-    background-color: #22252d;
+    background-color: var(--bg-calc);
     width: 100%;
     max-width: 375px;
     min-height: 640px;
@@ -31,7 +55,7 @@ body {
 }
 
 #btn-config {
-    background-color: #292d32;
+    background-color: var(--bg-keyboard);
     padding: 0.5rem;
     border-color: transparent;
     border-radius: 1rem 0;
@@ -47,12 +71,12 @@ body {
 
 #btn-config svg {
     height: 32px;
-    fill: #fefefe;
+    fill: var(--text-color);
 }
 
 #btn-config:hover {
     transition: all 0.3s;
-    background-color: #303439;
+    filter: brightness(120%);
 }
 
 #mask {
@@ -78,8 +102,8 @@ body {
     border-radius: 1.5rem;
     padding: 1.5rem 2.5rem;
     visibility: collapse;
-    color: white;
-    background-color: #22252d;
+    color: var(--text-color);
+    background-color: var(--bg-calc);
     gap: 1rem;
 }
 
@@ -104,34 +128,37 @@ label {
 	width: 5rem;
 	height: 2.5rem;
     margin-bottom: 1.5rem;
-	background: grey;
+    filter: grayscale(100%);
+	background: var(--bg-modal);
 	display: block;
 	border-radius: 100px;
 	position: relative;
 }
 
-label:after {
+label::after {
 	content: '';
 	position: absolute;
 	top: 4px;
 	left: 5px;
 	width: 2rem;
 	height: 2rem;
-	background: #fff;
+    filter: invert(var(--lbl-modal));
+	background-color: white;
 	border-radius: 90px;
 	transition: 0.3s;
 }
 
 input:checked + label {
-	background: #069b80;
+    filter: grayscale(0%);
+	background: var(--bg-modal);
 }
 
-input:checked + label:after {
+input:checked + label::after {
 	left: calc(100% - 5px);
 	transform: translateX(-100%);
 }
 
-label:active:after {
+label:active::after {
 	width: 2em;
 }
 /*FIM MODAL*/
@@ -142,7 +169,7 @@ label:active:after {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    color: white;
+    color: var(--text-color);
     text-align: right;
     flex: 1 1 0%;
 }
@@ -160,16 +187,16 @@ label:active:after {
 }
 
 .display .operator {
-    color: #eb6666;
+    color: var(--secondary-text);
 }
 
 .display .brackets, 
 .display .percent {
-    color: #26fed7;
+    color: var(--primary-text);
 }
 
 .keys {
-    background-color: #292d32;
+    background-color: var(--bg-keyboard);
     padding: 1.5rem;
     border-radius: 1.5rem 1.5rem 0 0;
     display: grid;
@@ -186,7 +213,7 @@ label:active:after {
     display: block;
     height: 0;
     padding-top: 100%;
-    background-color: #262933;
+    background-color: var(--bg-key);
     border-radius: 1rem;
     transition: 0,2s;
     user-select: none;
@@ -200,7 +227,7 @@ label:active:after {
 
     font-size: 2rem;
     font-weight: 700;
-    color: white;
+    color: var(--text-color);
 }
 
 .keys .key:hover {
@@ -208,9 +235,9 @@ label:active:after {
 }
 
 .keys .key.operator span {
-    color: #eb6666;
+    color: var(--secondary-text);
 }
 
 .keys .key.action span {
-    color: #26fed7;
+    color: var(--primary-text);
 }
