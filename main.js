@@ -1,12 +1,18 @@
-// modal config - selecionar ponto ou virgula
 const openModal = document.getElementById("btn-config");
 const modal = document.getElementById("modal");
 const mask = document.getElementById("mask");
 const closeModal = document.getElementById("modal-close");
 const modalInput = document.getElementById("modal-switch");
-let defaultDecimalRule = false;
+const decimalCharDiv = document.getElementById("decimalCharDiv");
+const commaChar = ",";
+const dotChar = ".";
+let decimalChar = dotChar;
+let auxiliarChar = commaChar;
+let modalText = document.getElementById("modal-text");
 
-console.log(modalInput.value);
+modalInput.addEventListener('click', () => {
+    
+})
 
 openModal.onclick = () => {
     modal.style.visibility = "visible";
@@ -25,65 +31,70 @@ window.onclick = function(event) {
     }
 }
 
-modalInput.onclick = () => {
-    console.log(modalInput.checked);
-    if(modalInput.checked == true){
-        defaultDecimalRule = true;
-    }else{
-        defaultDecimalRule = false;
-    }
-}
-
-console.log(defaultDecimalRule);
-
 const keys = document.querySelectorAll('.key');
 const displayInput = document.querySelector('.display .input');
 const displayOutput = document.querySelector('.display .output');
 
 let input = "";
 
+document.addEventListener("keydown", logKey);
+
+let validInput = ["1","2","3","4","5","6","7","8","9","0","/","*","-","+","Enter","Backspace",",",".","%","Escape"];
+let value;
+
+function logKey(keyboardKey) {
+    console.log(keyboardKey.key);
+    if(validInput.includes(keyboardKey.key)){
+        ProcessLogic(keyboardKey.key);
+    }else{
+        return;
+    }
+}
+
 keys.forEach(key => {
-    const value = key.dataset.key;
-
     key.addEventListener('click', () => {
-        if(value == "clear"){
-            input = "";
-            displayInput.innerHTML = "";
-            displayOutput.innerHTML = "";
-        } else if(value == "backspace"){
-            input = input.slice(0, -1);
-            displayInput.innerHTML = RearrangeInput(input);
-        } else if(value == "="){
-            let result = eval(PrepareInput(input));
-
-            displayOutput.innerHTML = RearrangeOutput(result);
-        } else if(value == "brackets"){
-            if(
-                input.indexOf("(") == -1 ||
-                input.indexOf("(") != -1 &&
-                input.indexOf(")") != -1 &&
-                input.lastIndexOf("(") < input.lastIndexOf(")")
-            ){
-                input += "(";
-            }else if(
-                input.indexOf("(") != -1 &&
-                input.indexOf(")") == -1 ||
-                input.indexOf("(") != -1 &&
-                input.indexOf("(") != -1 &&
-                input.lastIndexOf("(") > input.lastIndexOf(")")
-            ){
-                input += ")";
-            }
-
-            displayInput.innerHTML = RearrangeInput(input);
-        } else{
-            if(ValidateInput(value)){
-                input += value;
-                displayInput.innerHTML = RearrangeInput(input);
-            }
-        }
+        ProcessLogic(key.dataset.key);
     })
 })
+
+function ProcessLogic(value){
+    if(value == "clear" || value == "Escape"){
+        input = "";
+        displayInput.innerHTML = "";
+        displayOutput.innerHTML = "";
+    } else if(value == "backspace" || value == "Backspace"){
+        input = input.slice(0, -1);
+        displayInput.innerHTML = RearrangeInput(input);
+    } else if(value == "=" || value == "Enter"){
+        let result = eval(PrepareInput(input));
+
+        displayOutput.innerHTML = RearrangeOutput(result);
+    } else if(value == "brackets"){
+        if(
+            input.indexOf("(") == -1 ||
+            input.indexOf("(") != -1 &&
+            input.indexOf(")") != -1 &&
+            input.lastIndexOf("(") < input.lastIndexOf(")")
+        ){
+            input += "(";
+        }else if(
+            input.indexOf("(") != -1 &&
+            input.indexOf(")") == -1 ||
+            input.indexOf("(") != -1 &&
+            input.indexOf("(") != -1 &&
+            input.lastIndexOf("(") > input.lastIndexOf(")")
+        ){
+            input += ")";
+        }
+
+        displayInput.innerHTML = RearrangeInput(input);
+    } else{
+        if(ValidateInput(value)){
+            input += value;
+            displayInput.innerHTML = RearrangeInput(input);
+        }
+    }
+}
 
 function RearrangeInput(input){
     let inputArray = input.split("");
@@ -112,19 +123,19 @@ function RearrangeInput(input){
 
 function RearrangeOutput(output){
     let outputString = output.toString();
-    let decimal = outputString.split(".")[1];
-    outputString = outputString.split(".")[0];
-
+    let decimal = outputString.split(decimalChar)[1];
+    outputString = outputString.split(decimalChar)[0];
     let outputArray = outputString.split("");
-    
-    if(outputArray.length > 3){
+    let outputArrayLength = outputArray.length;
+
+    if(outputArrayLength > 3){
         for(let i = outputArray.length - 3; i > 0; i-= 3){
-            outputArray.splice(i, 0, ",");
+            outputArray.splice(i, 0, auxiliarChar);
         }
     }
 
     if(decimal){
-        outputArray.push(".");
+        outputArray.push(decimalChar);
         outputArray.push(decimal);
     }
 
@@ -133,11 +144,7 @@ function RearrangeOutput(output){
 
 function ValidateInput(value){
     let lastInput = input.slice(-1);
-    let operators = ["/", "*", "-", "+"];
-
-    if(value == "." && lastInput == "."){
-        return false;
-    }
+    let operators = ["/", "*", "-", "+", dotChar, commaChar];
 
     if(operators.includes(value)){
         if(operators.includes(lastInput)){
