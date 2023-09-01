@@ -1,3 +1,5 @@
+alert("Bem vindo à calculadora!\n\nUse ponto no separador decimal.");
+
 const openModal = document.getElementById("btn-config");
 const modal = document.getElementById("modal");
 const mask = document.getElementById("mask");
@@ -13,17 +15,17 @@ let modalText = document.getElementById("modal-text");
 const theme = window.localStorage.getItem("theme");
 console.log(theme);
 
-if (theme === "barbie"){
-    document.body.classList.add("barbie");
+if (theme === "maurelio"){
+    document.body.classList.add("maurelio");
     modalInput.checked = true;
 }
 
 modalInput.addEventListener('click', () => {
-    document.body.classList.toggle("barbie");
-    if (theme === "barbie") {
+    document.body.classList.toggle("maurelio");
+    if (theme === "maurelio") {
         window.localStorage.setItem("theme", null);
     } else{
-        window.localStorage.setItem("theme", "barbie");
+        window.localStorage.setItem("theme", "maurelio");
     }
 })
 console.log(theme);
@@ -57,7 +59,7 @@ let validInput = ["1","2","3","4","5","6","7","8","9","0","/","*","-","+","Enter
 let value;
 
 function logKey(keyboardKey) {
-    console.log(keyboardKey.key);
+    console.log(keyboardKey.code);
     if(validInput.includes(keyboardKey.key)){
         ProcessLogic(keyboardKey.key);
     }else{
@@ -81,7 +83,7 @@ function ProcessLogic(value){
         displayInput.innerHTML = RearrangeInput(input);
     } else if(value == "=" || value == "Enter"){
         let result = eval(PrepareInput(input));
-
+        console.log(result);
         displayOutput.innerHTML = RearrangeOutput(result);
     } else if(value == "brackets"){
         if(

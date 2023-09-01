@@ -2,24 +2,36 @@
     --bg-body: #0b0c0f;
     --bg-calc: #22252d;
     --bg-keyboard: #292d32;
-    --bg-key: #262933;
+    --bg-key: transparent;
     --text-color: #fefefe;
     --bg-modal: #069b80;
     --lbl-modal: 1;
     --primary-text: #26fed7;
     --secondary-text: #eb6666;
 }
-
+/* 
 .barbie {
     --bg-body: #0f0007;
     --bg-calc: #2d0018;
     --bg-keyboard: #32001c;
-    --bg-key: #33001b;
+    --bg-key: transparent;
     --text-color: #fefefe;
     --bg-modal: #9b064c;
     --lbl-modal: 1;
     --primary-text: #f3c10a;
     --secondary-text: #ff811a;
+} */
+
+.maurelio {
+    --bg-body: #0b040f;
+    --bg-calc: #1c0a26;
+    --bg-keyboard: #2e103c;
+    --bg-key: transparent;
+    --text-color: #e7b3ff;
+    --bg-modal: #C445FF;
+    --lbl-modal: 1;
+    --primary-text: #f3c10a;
+    --secondary-text: #f08f13;
 }
 
 * {
@@ -231,7 +243,7 @@ label:active::after {
 }
 
 .keys .key:hover {
-    box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
 }
 
 .keys .key.operator span {
